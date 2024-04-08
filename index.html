@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+        /* The switch - the box around the slider */
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 34px;
+        }
+
+        /* Hide default HTML checkbox */
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        /* The slider */
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #02d886;
+            -webkit-transition: .4s;
+            transition: .4s;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 26px;
+            width: 26px;
+            left: 4px;
+            bottom: 4px;
+            background-color: #34f8ad;
+            -webkit-transition: .4s;
+            transition: .4s;
+        }
+
+        input:checked + .slider {
+            background-color: #02a767;
+        }
+
+        input:focus + .slider {
+            box-shadow: 0 0 1px #02a767;
+        }
+
+        input:checked + .slider:before {
+            -webkit-transform: translateX(26px);
+            -ms-transform: translateX(26px);
+            transform: translateX(26px);
+        }
+
+        /* Rounded sliders */
+        .slider.round {
+            border-radius: 34px;
+        }
+
+        .slider.round:before {
+            border-radius: 50%;
+        }
+
+        .container{
+            width: 50%;
+            margin: auto;
+            background-color: #fff67d;
+            padding: 30px;
+            border: 1px solid black;
+            border-radius: 15px;
+        }
+
+        #connectBtn{
+            width: 150px;
+            height:30px;
+            border-radius: 15px;
+            color: #000000;
+            background-color: #04a8a8;
+        }
+
+        .saveBtn{
+            width: 150px;
+            height:30px;
+            border-radius: 15px;
+            color: #000000;
+            background-color: #04a8a8;
+        }
+
+        .cols{
+            flex: 1;
+            margin: 0 10;
+        }
+        .row
+        {
+            display: flex;
+            margin-bottom: 5%;
+        }
+
+        hr{
+            border: 0; /* Remove default border */
+            height: 0.5px; /* Set the height of the line */
+            background-color: #000; /* Set the color of the line */
+            margin: 20px 0; /* Add some margin for spacing */
+
+            /*background-color: transparent; /* Set background color to transparent */
+            /*border-bottom: 0.5px dashed #000; /* Set border style to dashed and color */
+        }
+
+        .noneEditable{
+            resize: none;
+        }
+    </style>
+
+    <title>Smart Pot</title>
+</head>
+<body>
+
+    <div class="container">
+
+        <h1>Smart Pot</h1>
+
+        <hr>
+
+        <input id="connectBtn" type="button" value="Connect">
+        <br>
+        <br>
+        <h3>Current Pot Conditions</h3>
+
+        <div class="row">
+            <div class="cols" style="padding-right: 5px;">
+                <label for="currTemp">Temperature</label>
+            </div>
+            <div class="cols">
+                <textarea class="noneEditable" name="currTemp" id="currTemp" cols="3" rows="1" readonly>34.0</textarea>
+            </div>
+            <div class="cols">
+                <span>&nbsp; &#176; C</span>
+            </div>
+            <div class="cols">
+                <label for="currTemp">Moisture</label>
+            </div>
+            <div class="cols">
+                <textarea class="noneEditable" name="currMoisture" id="currMoisture" cols="3" rows="1" readonly>50.0</textarea>
+            </div>
+            <div class="cols">
+                <span>% &nbsp;</span>
+            </div>
+            <!-- <div class="cols" style="padding-right: 5px;">
+                <label for="currLvl">Reservoir</label>
+            </div>
+            <div class="cols">
+                <textarea class="noneEditable" name="currLvl" id="currLvl" cols="3" rows="1" readonly>40.0</textarea>
+            </div>
+            <div class="cols">
+                <span>&nbsp; ml</span>
+            </div> -->
+        </div>
+
+        <h3>Settings</h3>
+
+        <div class="row">
+            <div class="cols">
+                <div class="row">
+                    <div class="cols">
+                        <label for="optTemp">Optimum Temperature </label>
+                    </div>
+                    <div class="cols">
+                        <input type="number" name="optTemp" id="optTemp"><br>
+                    </div>
+                    <div class="cols">
+                        <span>&nbsp; &#176; C</span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="cols">
+                        <label for="optTemp">Optimum Moisture </label>
+                    </div>
+                    <div class="cols">
+                        <input type="number" name="optMoist" id="optMoist"><br>
+                    </div>
+                    <div class="cols">
+                        <span>&nbsp; %</span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="cols">
+                        <label for="optTemp">Low Moisture Threshold </label>
+                    </div>
+                    <div class="cols">
+                        <input type="number" name="lowMoistThres" id="lowMoistThres"><br>
+                    </div>
+                    <div class="cols">
+                        <span>&nbsp; %</span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="cols">
+                        <label for="optTemp">Watering Countdown </label>
+                    </div>
+                    <div class="cols">
+                        <input type="number" name="wateringInterval" id="wateringInterval"><br>
+                    </div>
+                    <div class="cols">
+                        <span>&nbsp; hrs</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="cols">
+                <div class="row">
+                    <div class="cols">
+                        <label for="buzzer" id="buzzer">Buzzer</label>
+                    </div>
+                    <div class="cols">
+                        <label class="switch">
+                            <input type="checkbox">
+                            <span class="slider round" id="buzzer"></span>
+                        </label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="cols">
+                        <label for="buzzer" id="buzzer">Animation</label>
+                    </div>
+                    <div class="cols">
+                        <label class="switch">
+                            <input type="checkbox">
+                            <span class="slider round" id="animation"></span>
+                        </label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="cols">
+                        <label for="buzzer" id="buzzer">LED Lights</label>
+                    </div>
+                    <div class="cols">
+                        <label class="switch">
+                            <input type="checkbox">
+                            <span class="slider round" id="ledlights"></span>
+                        </label>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <input type="button" value="Save Settings" class="saveBtn">
+
+    </div>
+
+</body>
+</html>
